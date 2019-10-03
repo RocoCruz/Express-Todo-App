@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400&display=swap&subset=latin-ext"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Todo app</title>
+</head>
+
+<body>
+    <section class="todo-app">
+        <div class="todo-box">
+            <h2>Todo app</h2>
+            <div class="todo-form">
+                <form action="/newtodo" method="POST">
+                    <input type="text" name="text" placeholder="Enter text...">
+                    <button type="submit"><i class="fas fa-pencil-alt"></i></button>
+                </form>
+            </div>
+            <div class="todo-list">
+                <% if(items.length > 0) { %>
+                <table>
+                    <%  for(let item of items) { %>
+                    <tr>
+                        <td class="item"><%= item.text %></td>
+                        <td class="edit" data-itemid="<%= item.id %>"><a href="/todoedit/<%= item._id %>"><i
+                                    class="fas fa-bars"></i></a></td>
+                        <td class="delete"><a href="/tododelete/<%= item._id %>"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                    <% } %>
+                </table>
+                <% }else { %>
+                <h3><%= dots %></h3>
+                <% } %>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
