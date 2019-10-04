@@ -2,6 +2,7 @@ require('dotenv/config');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const mongoose = require('mongoose');
 const todoRoute = require('./routes/todo');
 
@@ -33,7 +34,7 @@ app.use(todoRoute);
 
 
 app.get('*',(req,res) => {
-    res.send('Invalid page');
+    res.status(404).sendFile(path.join(__dirname,'public','404.html'));
 });
 
 

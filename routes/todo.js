@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 // get items from mongo DB
-router.get('/todo', async (req, res) => {
+router.get('/', async (req, res) => {
 
     try {
         const todoList = await TodoList.find();
@@ -32,7 +32,7 @@ router.post('/newtodo', async (req, res) => {
 
     } catch (err) {
         console.log(`Validator message: ${err.message}`);
-        return res.redirect('/todo');
+        return res.redirect('/');
     };
 
 
@@ -43,7 +43,7 @@ router.post('/newtodo', async (req, res) => {
     const todoList = new TodoList(item);
     try {
         const savedTodoList = await todoList.save();
-        return res.redirect('/todo');
+        return res.redirect('/');
 
     } catch (err) {
         return console.log(err);
@@ -53,13 +53,13 @@ router.post('/newtodo', async (req, res) => {
 
 
 // delete item from DB
-router.delete('/todo', async (req, res) => {
+router.delete('/', async (req, res) => {
 
     try {
         const deletedItem = await TodoList.findByIdAndRemove({
             _id: req.body._id
         });
-        return res.redirect('/todo');
+        return res.redirect('/');
 
     } catch (err) {
         return console.log(err);
@@ -105,7 +105,7 @@ router.post('/todoedit/:id', async (req, res) => {
                 text: req.body.text
             }
         });
-        return res.redirect('/todo');
+        return res.redirect('/');
 
     } catch (err) {
         return console.log(err);
@@ -143,7 +143,7 @@ router.post('/tododelete/:id', async (req, res) => {
         const deletedItem = await TodoList.findByIdAndDelete({
             _id: itemId
         });
-        return res.redirect('/todo');
+        return res.redirect('/');
 
     } catch (err) {
         return console.log(err);
